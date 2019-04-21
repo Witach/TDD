@@ -1,6 +1,7 @@
 package Tests;
 
 import GradeBook.GradeBook;
+import Subject.Subject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,5 +30,28 @@ class GradeBookTest {
         assertAll(()->assertEquals("Dawid",marks.name),
                 ()->assertEquals("Witaszek",marks.lastName),
                         ()->assertEquals(215920,marks.index));
+    }
+
+    @Test
+    void getSubjectThrow(){
+        assertThrows(Exception.class,()->marks.getSubject("Chemia"));
+    }
+
+    @Test
+    void getSubject() throws Exception {
+        marks.addSubject(new Subject("Chemia"));
+        assertEquals("Chemia",marks.getSubject("Chemia").name);
+    }
+
+    @Test
+    void addSubjectThrow() throws Exception{
+        marks.addSubject(new Subject("Chemia"));
+        assertThrows(Exception.class,()->marks.addSubject(new Subject("Chemia")));
+    }
+
+    @Test
+    void addSubject() throws Exception{
+        marks.addSubject(new Subject("Chemia"));
+        assertEquals("Chemia",marks.getSubject("Chemia").name);
     }
 }

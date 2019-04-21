@@ -10,13 +10,27 @@ public class GradeBook {
     public long index;
 
     public GradeBook(String name, String lastName, long index) throws Exception {
-
         validateIndex(index);
         validateLastName(lastName);
         validateName(name);
         this.name=name;
         this.lastName=lastName;
         this.index=index;
+        subjects = new ArrayList<Subject>();
+    }
+    public Subject getSubject(String name) throws Exception{
+        for(Subject i:subjects){
+            if(i.name==name)
+                return i;
+        }
+        throw new Exception("Nie ma takiego przedmiotu");
+    }
+    public void addSubject(Subject subject) throws Exception{
+        for(Subject i: subjects){
+            if(i.name.equals(subject.name))
+                throw new Exception("Przedmiot o takiej nazwie już istnieje");
+        }
+        subjects.add(subject);
     }
     static void  validateName(String name) throws Exception{
         if(name==null||name.length()<2){
