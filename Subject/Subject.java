@@ -9,6 +9,7 @@ public class Subject {
         if(!validateName(name))
             throw new Exception("Coś jest nie tak z  nazwą przedmiotu");
         this.name=name;
+        marks = new ArrayList<Double>();
     }
     public static boolean validateName(String name){
         if(name.length()<2){

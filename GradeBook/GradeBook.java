@@ -1,7 +1,9 @@
 package GradeBook;
 import Subject.Subject;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class GradeBook {
     public ArrayList<Subject> subjects;
@@ -42,9 +44,65 @@ public class GradeBook {
             throw new Exception("Cos jest nei tak z nazwiskiem");
         }
     }
-    static  void  validateIndex (long index)throws Exception{
-        if (index<0){
+    static  void  validateIndex (long index)throws Exception {
+        if (index < 0) {
             throw new Exception("Cos jest nei tak z indexem");
         }
+    }
+
+    public void addMark(String name, double mark) throws Exception{
+        if(!validateMark(mark))
+            throw new Exception("Wprowadzono błędną ocene");
+        Subject tmp = null;
+        for(Subject i: subjects){
+            if(i.name==name) {
+                tmp = i;
+                break;
+            }
+        }
+        if(tmp==null)
+            throw new Exception("Nie ma takiego przedmiotu w dzienniku");
+        tmp.marks.add(mark);
+    }
+    static boolean validateMark(double mark){
+        if(mark<1||mark>6||mark%0.5!=0)
+            return false;
+        return true;
+    }
+
+    public double calcAvgFromSubject(String name) throws Exception{
+        Subject tmp = null;
+        for(Subject i: subjects){
+            if(i.name==name) {
+                tmp = i;
+                break;
+            }
+        }
+        if(tmp==null)
+            throw new Exception("Nie ma takiego przedmiotu w bazie");
+        if(tmp.marks.isEmpty())
+            throw new Exception("Nie ma ocen w tym przedmiocie");
+        double sum=0;
+        int length=0;
+        for(double i: tmp.marks){
+            sum+=i;
+            length++;
+        }
+        return sum/(double)length;
+    }
+
+    public double clacAvg() throws Exception{
+        if(subjects.isEmpty())
+            throw new Exception("nie ma żadnego przedmiotu");
+        ArrayList<Double> tmp = new ArrayList<>();
+        int len=0;
+        for(Subject i:subjects)
+            tmp.add(this.calcAvgFromSubject(i.name));
+        double sum=0;
+        for(double i:tmp){
+            len++;
+            sum+=i;
+        }
+        return sum/(double)len;
     }
 }
