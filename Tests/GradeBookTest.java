@@ -2,8 +2,6 @@ package Tests;
 
 import GradeBook.GradeBook;
 import Subject.Subject;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,13 +60,7 @@ class GradeBookTest {
     @Test
     void addMark() throws Exception {
         marks.addMark("Fizyka",3);
-        Subject tmp = null ;
-        for(Subject i:marks.subjects){
-            if(i.name=="Fizyka") {
-                tmp = i;
-                break;
-            }
-        }
+        Subject tmp = marks.getSubject("Fizyka");
         assertNotNull(tmp);
        double a = tmp.marks.get(0);
        assertEquals(3,a);

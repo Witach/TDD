@@ -1,9 +1,7 @@
 package GradeBook;
-import Subject.Subject;
-import org.junit.jupiter.api.Test;
 
+import Subject.Subject;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class GradeBook {
     public ArrayList<Subject> subjects;
@@ -53,15 +51,7 @@ public class GradeBook {
     public void addMark(String name, double mark) throws Exception{
         if(!validateMark(mark))
             throw new Exception("Wprowadzono błędną ocene");
-        Subject tmp = null;
-        for(Subject i: subjects){
-            if(i.name==name) {
-                tmp = i;
-                break;
-            }
-        }
-        if(tmp==null)
-            throw new Exception("Nie ma takiego przedmiotu w dzienniku");
+        Subject tmp = getSubject(name);
         tmp.marks.add(mark);
     }
     static boolean validateMark(double mark){
@@ -71,15 +61,7 @@ public class GradeBook {
     }
 
     public double calcAvgFromSubject(String name) throws Exception{
-        Subject tmp = null;
-        for(Subject i: subjects){
-            if(i.name==name) {
-                tmp = i;
-                break;
-            }
-        }
-        if(tmp==null)
-            throw new Exception("Nie ma takiego przedmiotu w bazie");
+        Subject tmp = getSubject(name);
         if(tmp.marks.isEmpty())
             throw new Exception("Nie ma ocen w tym przedmiocie");
         double sum=0;

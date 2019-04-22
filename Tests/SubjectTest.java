@@ -2,7 +2,6 @@ package Tests;
 import Subject.Subject;
 import org.junit.jupiter.api.Test;
 
-import java.security.spec.ECField;
 
 import static org.junit.jupiter.api.Assertions.*;
 
